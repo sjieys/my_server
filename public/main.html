@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>이웃 새 글 - 홍길동님의 블로그</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #f8f8f8;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 15px;
+      border-bottom: 1px solid #ccc;
+    }
+    .profile {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .profile img {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+    }
+    .nav-links a {
+      margin-left: 10px;
+      padding: 6px 12px;
+      background-color: #eaeaea;
+      border-radius: 4px;
+      text-decoration: none;
+      color: #333;
+    }
+    h2 {
+      margin-top: 30px;
+      font-size: 20px;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 5px;
+    } 
+    .post {
+      display: flex;
+      justify-content: space-between;
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      padding: 15px;
+      margin-bottom: 20px;
+    }
+    .post-left {
+      flex: 1;
+    }
+    .post-user {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 5px;
+    }
+    .post-user img {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+    }
+    .post-title a {
+      font-size: 18px;
+      font-weight: bold;
+      text-decoration: none;
+      color: #333;
+    }
+    .post-summary a {
+      font-size: 14px;
+      color: #555;
+      text-decoration: none;
+    }
+    .post-comments a {
+      font-size: 13px;
+      color: #888;
+      text-decoration: none;
+    }
+    .post-right img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="profile">
+      <!-- <img src="https://via.placeholder.com/36" alt="프사"> -->
+      <span>홍길동</span>
+    </div>
+    <div class="nav-links">
+      <a href="http://localhost:3000/write.html">글쓰기</a>
+      <a href="#">로그아웃</a>
+      <!-- TODO: 로그인 되어있으면 로그아웃으로 보이게 해야 함 -->
+      <a href="http://localhost:3000/login.html">로그인</a> 
+    </div>
+  </header>
+
+  <h2>이웃 새 글</h2>
+
+  <!-- ✅ 여기에 게시글들을 동적으로 넣을 수 있도록 section으로 감쌈 -->
+  <section id="post-list">
+    
+  </section>
+  <script type="module"src="js/main.js"></script>
+</body>
+</html>

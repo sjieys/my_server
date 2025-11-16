@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<!-- saved from url=(0053)http://localhost:3000/edit.html?post_id=1753341081556 -->
+<html lang="ko"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <title>글쓰기</title>
+  <link rel="stylesheet" href="./글쓰기_files/edit.css">
+</head>
+<body>
+  <form id="postForm">
+    
+    <!-- 제목 입력 -->
+    <div class="title-input">
+      <input type="text" id="title" placeholder="제목을 입력해주세요">
+    </div>
+
+    <!-- 내용 입력 -->
+    <div class="content-input">
+      <textarea id="content" placeholder="내용을 입력해주세요"></textarea>
+    </div>
+
+    <!-- 이미지 업로드 라벨 -->
+    <div id="image-upload-wrapper" style="display: none;">
+      <label for="imageInput" class="image-upload-label">내가 이미지<br>올릴 것임</label>
+      <input type="file" name="image" id="imageInput" style="display: none">
+      <button type="button" class="remove-image-btn">X</button>
+    </div>
+
+    <!-- 이미지 미리보기 및 삭제 -->
+    <div id="image-preview-wrapper" style="display: inline-block;">
+      <img id="image-preview" src="./글쓰기_files/ok8jehkf9wdikdj7kaac.png" alt="이미지 미리보기" style="display: block;">
+      <button type="button" class="remove-image-btn">X</button>
+    </div>
+
+    <!-- 제출 버튼 -->
+    <button id="submit-button" type="submit">수정하기</button>
+  </form>
+
+  <script type="module" src="./글쓰기_files/edit.js.다운로드"></script>
+
+
+</body></html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>댓글</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      background: #fff;
+    }
+
+    h1 {
+      border-bottom: 2px solid #ccc;
+      padding-bottom: 10px;
+      font-size: 20px;
+    }
+
+    .comment {
+      border-bottom: 1px solid #eee;
+      padding: 16px 0;
+      display: flex;
+      align-items: flex-start;
+    }
+
+    .profile {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #ccc;
+      margin-right: 10px;
+      flex-shrink: 0;
+    }
+
+    .comment-body {
+      flex: 1;
+    }
+
+    .author {
+      font-weight: bold;
+      margin-bottom: 4px;
+    }
+
+    .date {
+      color: #888;
+      font-size: 12px;
+      margin-bottom: 8px;
+    }
+
+    .content {
+      font-size: 14px;
+      white-space: pre-wrap;
+    }
+
+    .no-comments {
+      color: #666;
+      margin-top: 20px;
+    }
+
+    .comment-form {
+      margin-top: 30px;
+    }
+
+    .comment-form textarea {
+      width: 100%;
+      height: 80px;
+      padding: 8px;
+      font-size: 14px;
+      resize: none;
+    }
+
+    .comment-form p {
+      color: #888;
+      font-size: 14px;
+      margin-top: 8px;
+    }
+
+    .submit-btn {
+      margin-top: 10px;
+      padding: 8px 16px;
+      font-size: 14px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      display: none; /* 로그인 시 JS로 보이게 */
+    }
+  </style>
+</head>
+<body>
+  <h1>댓글 <span id="comments-cnt">undefined</span></h1>
+
+  <section id="comment-list">
+    <!-- 댓글이 없을 경우 -->
+    <!-- <p class="no-comments">등록된 댓글이 없습니다.</p> -->
+  </section>
+
+  <div class="comment-form">
+    <textarea id="comment-input" placeholder="댓글을 작성하려면 로그인이 필요합니다." disabled></textarea>
+    <button id="submit-btn" class="submit-btn">댓글 등록</button>
+  </div>
+
+  <script type="module" src="./js/comments.js"></script>
+</body>
+</html>

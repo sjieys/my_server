@@ -1,0 +1,125 @@
+// import * as utils from "./utils.js";
+const params = new URLSearchParams(window.location.search);
+const post_id = Number(params.get("post_id"));
+// post.html의 요소
+const edit_title = document.getElementById("title");
+const edit_content = document.getElementById("content");
+const image_preview = document.getElementById("image-preview");
+const edit_btn = document.getElementById("submit-button");
+const edit_image = document.getElementById("imageInput");
+// 해당 게시글의 제목, 내용 불러오기
+const req_post = await fetch(`http://localhost:3000/posts/${post_id}`, {
+    method: "GET",
+    headers: {'Content-Type':'application/json'}
+});
+const post = await req_post.json();
+
+
+// 기존 post의 속성들
+const title = post.title;
+const content = post.content;
+const imageUrl = post.imageUrl;
+
+// 원본 내용 넣기
+edit_title.value = title;
+edit_content.value = content;
+image_preview.src = imageUrl;
+image_preview.style.display = 'block';
+// alert(`edit_title: ${post.title}, edit_content: ${post.content}, image_preview:${post.imageUrl}`);
+
+// 이미지 관련 요소들
+const uploadWrapper = document.getElementById("image-upload-wrapper");
+const previewWrapper = document.getElementById("image-preview-wrapper");
+const image_input = document.getElementById("imageInput");
+const preview_image = document.getElementById("image-preview");
+
+
+// alert(`post: ${post.post_id}`);
+
+// 수정 게시물 fetch
+edit_btn.addEventListener("click", async(e) => {
+    e.preventDefault();
+    alert("수정 등록 버튼 눌림");
+    const edited_post = await makeEditedPost();
+    // alert(`edited_post: ${edited_post}\n
+    //     imageUrl: ${edited_post.imageUrl}`);
+    console.log(`edited_post_id: ${edited_post.post_id}`);
+    const post_upload_res = await fetch(`http://localhost:3000/put`, {
+        method: "PUT",
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify(edited_post)
+    });
+    // alert(`res.status: ${post_upload_res.status}`);
+    const res = await post_upload_res.json();
+    alert(res.message);
+    window.location.href = "http://localhost:3000/main.html";
+});
+
+// 이미지 미리보기or업로드
+if(imageUrl) {
+    show_preview_only(imageUrl);
+}
+if(!imageUrl) {
+    show_upload_only();
+}
+document.querySelectorAll(".remove-image-btn").forEach((delete_btn) => {
+    delete_btn.addEventListener("click", () => {
+        alert("버튼 눌림");
+        show_upload_only();
+    });
+});
+
+image_input.addEventListener("change", (event) => {
+    const file = event.target.files[0];
+    const previewUrl = makePreviewUrl(file);
+
+    if (previewUrl) {
+        preview_image.src = previewUrl;
+        preview_image.style.display = "block";
+        show_preview_only();
+    }
+})
+
+function show_upload_only() {
+    uploadWrapper.style.display = "inline-block";
+    previewWrapper.style.display = "none";
+}
+
+function show_preview_only(imageUrl) {
+    uploadWrapper.style.display = "none";
+    previewWrapper.style.display = "inline-block";
+}
+
+async function makeEditedPost() {
+    return {
+        post_id: post_id,
+        user_id: post.user_id,
+        nickname: post.nickname,
+        title: edit_title.value,
+        content: edit_content.value,
+        imageUrl: await makeImageUrl(edit_image)
+    } 
+}
+
+function makePreviewUrl(file) {
+  if (!file) return null;
+  return URL.createObjectURL(file);
+}
+
+async function makeImageUrl(file_input) {
+    // (이미지)파일
+    // const fileInput = document.getElementById('imageInput');
+    const formData = new FormData();
+    formData.append('image', file_input.files[0]);
+    // (이미지)파일 업로드 요청
+    const upload_res = await fetch('http://localhost:3000/upload', {
+        method: 'POST',
+        body: formData
+    });
+    alert(`makeImageUrl---upload_res.ok: ${upload_res.ok}`);
+
+    // 업로드 된 (이미지)파일의 링크를 변수에 저장
+    const upload_data = await upload_res.json();
+    const imageUrl = upload_data.imageUrl;
+    return imageUrl;
+}
